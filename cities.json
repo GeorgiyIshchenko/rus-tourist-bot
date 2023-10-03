@@ -1,0 +1,24 @@
+{
+  "cities_zk": [
+    ["Сергиев Посад", "https://rus-tour-bot-web-app.vercel.app?city=sergiev_posad"],
+    ["Переславль-Залесский", "https://rus-tour-bot-web-app.vercel.app?city=per_zal"],
+    ["Ярославль", "https://rus-tour-bot-web-app.vercel.app?city=yaroslavl"],
+    ["Кострома", "https://rus-tour-bot-web-app.vercel.app?city=kostroma"],
+    ["Ростов", "https://rus-tour-bot-web-app.vercel.app?city=rostov"],
+    ["Иваново", "https://rus-tour-bot-web-app.vercel.app?city=ivanovo"],
+    ["Суздаль", "https://rus-tour-bot-web-app.vercel.app?city=suzdal"],
+    ["Владимир", "https://rus-tour-bot-web-app.vercel.app?city=vladimir"]
+  ],
+  "cities_gg": [
+    ["Москва", "https://rus-tour-bot-web-app.vercel.app?city=moskva"],
+    ["Ленинград", "https://rus-tour-bot-web-app.vercel.app?city=leningrad"],
+    ["Волгоград", "https://rus-tour-bot-web-app.vercel.app?city=volgograd"],
+    ["Севастополь", "https://rus-tour-bot-web-app.vercel.app?city=sevastopol"],
+    ["Новороссийск", "https://rus-tour-bot-web-app.vercel.app?city=novorossiysk"],
+    ["Керчь", "https://rus-tour-bot-web-app.vercel.app?city=kerch"],
+    ["Минск", "https://rus-tour-bot-web-app.vercel.app?city=minsk"],
+    ["Тула", "https://rus-tour-bot-web-app.vercel.app?city=tyla"],
+    ["Мурманск", "https://rus-tour-bot-web-app.vercel.app?city=murmansk"],
+    ["Смоленск", "https://rus-tour-bot-web-app.vercel.app?city=smolensk"]
+  ]
+}
