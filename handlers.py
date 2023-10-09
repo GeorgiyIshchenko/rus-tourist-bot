@@ -13,7 +13,7 @@ ZK_STATE, GG_STATE = "category: Золотое кольцо", "category: Гор�
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [InlineKeyboardButton(text="Золотое кольцо", callback_data=ZK_STATE)],
-        [InlineKeyboardButton(text="Города-герои", callback_data=GG_STATE)],
+        # [InlineKeyboardButton(text="Города-герои", callback_data=GG_STATE)],
     ]
     await update.message.reply_text(START, parse_mode=ParseMode.MARKDOWN,
                                     reply_markup=InlineKeyboardMarkup(keyboard))
@@ -55,6 +55,10 @@ async def means_of_transport(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
 async def advice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text=ADVICE, parse_mode="Markdown")
+
+
+async def sources(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(text=SOURCES, parse_mode="Markdown")
 
 
 async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):

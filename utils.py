@@ -30,3 +30,4 @@ with open("cities.json", "r", encoding="utf-8") as f:
         cities_zk.append(City(name=city[0], url=city[1], _type=City.CityType.ZK))
     for city in cities["cities_gg"]:
         cities_gg.append(City(name=city[0], url=city[1], _type=City.CityType.GG))
+    cities_zk.sort(key=lambda x: x.name)

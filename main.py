@@ -25,6 +25,7 @@ handlers = [
     CommandHandler("routes", routes),
     CommandHandler("means_of_transport", means_of_transport),
     CommandHandler("advice", advice),
+    CommandHandler("sources", sources),
     CallbackQueryHandler(city_list, "category"),
     InlineQueryHandler(inline_query),
 ]
