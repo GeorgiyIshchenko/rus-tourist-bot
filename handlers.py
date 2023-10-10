@@ -1,6 +1,6 @@
 from uuid import uuid4
 from telegram import Update, InlineQueryResultArticle, InputTextMessageContent, WebAppInfo, \
-    InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResult, InlineQueryResultPhoto, InlineQueryResultsButton
+    InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultPhoto, InputMessageContent
 from telegram.constants import ParseMode
 from telegram.ext import ContextTypes
 
@@ -11,12 +11,21 @@ ZK_STATE, GG_STATE = "category: Золотое кольцо", "category: Гор�
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = [
-        [InlineKeyboardButton(text="Золотое кольцо", callback_data=ZK_STATE)],
-        # [InlineKeyboardButton(text="Города-герои", callback_data=GG_STATE)],
-    ]
-    await update.message.reply_text(START, parse_mode=ParseMode.MARKDOWN,
-                                    reply_markup=InlineKeyboardMarkup(keyboard))
+    print(context.args)
+    if len(context.args):
+        print(context.args)
+        city = (await City.get_cities_by_name(context.args[0]))[0]
+        await update.message.reply_text(text=f'Что я нашел по городу "{city.name}"', reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton(text="🔍Посмотреть", web_app=WebAppInfo(url=city.url))]]))
+    else:
+        keyboard = [
+            [InlineKeyboardButton(text="🔎 Гид", callback_data=ZK_STATE)],
+            # [InlineKeyboardButton(text="Города-герои", callback_data=GG_STATE)],
+            [InlineKeyboardButton(text="🗺 Карта",
+                                  web_app=WebAppInfo(url="https://rus-tour-bot-web-app.vercel.app/?full=1"))]
+        ]
+        await update.message.reply_text(START, parse_mode=ParseMode.MARKDOWN,
+                                        reply_markup=InlineKeyboardMarkup(keyboard))
 
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -64,18 +73,19 @@ async def sources(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.inline_query.query
 
-    if not query:
-        return
-
     results = list()
     for city in await City.get_cities_by_name(name=query):
         results.append(InlineQueryResultArticle(
             id=str(uuid4()),
+            thumbnail_url=city.image_url,
             title=city.name,
-            input_message_content=InputTextMessageContent(f"{city.url}"),
+            url=city.image_url,
+            hide_url=True,
+            input_message_content=InputTextMessageContent(
+                f"Туристические объекты города {city.name}. В нашем боте @russian_tourist_bot"),
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text=f"{city.name}",
+                                                                     url=f't.me/russian_tourist_bot?start={city.name}')]])
         ))
 
-    if results:
-        await update.inline_query.answer(results, button=InlineQueryResultsButton(text="Узнать больше",
-                                                                                  web_app=WebAppInfo(
-                                                                                      "https://rus-tour-bot-web-app.vercel.app?city=sergiev_posad")))
+    print(results)
+    await update.inline_query.answer(results=results)
