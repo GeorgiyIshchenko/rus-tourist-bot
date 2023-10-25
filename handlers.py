@@ -70,6 +70,11 @@ async def sources(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text=SOURCES, parse_mode="Markdown")
 
 
+async def authors(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_contact(phone_number="+79851890859", first_name="Владислав", last_name="Овчаров")
+    await update.message.reply_contact(phone_number="+79261335127", first_name="Георгий", last_name="Ищенко")
+
+
 async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.inline_query.query
 
@@ -82,10 +87,9 @@ async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
             url=city.image_url,
             hide_url=True,
             input_message_content=InputTextMessageContent(
-                f"Туристические объекты города {city.name}. В нашем боте @russian_tourist_bot"),
+                f"Туристические объекты города {city.name}. В боте @russian_tourist_bot"),
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text=f"{city.name}",
-                                                                     url=f't.me/russian_tourist_bot?start={city.name}')]])
+                                                                     url=f't.me/Health5432_bot?start={city.name}')]])
         ))
 
-    print(results)
     await update.inline_query.answer(results=results)
